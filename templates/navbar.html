@@ -1,0 +1,92 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
+    <div class="container-fluid">
+        <img
+            src="/static/images/starlette__short_logo__dark.svg"
+            alt="logo"
+            height="32"
+        />
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a
+                        class="nav-link dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        href="#"
+                        role="button"
+                        aria-expanded="false"
+                        >&</a
+                    >
+                    <ul class="dropdown-menu">
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="/">home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="/auth/list"
+                                >user</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="/chat/foo"
+                                >chat</a
+                            >
+                        </li>
+                    </ul>
+                </li>
+
+                {# #}
+
+                <li class="nav-item dropdown">
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        account
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <span class="dropdown-item">
+                            <i class="bi bi-person-check"></i>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/auth/register">
+                                <i class="bi bi-person"></i>
+                                <sup class="ms-2">register</sup>
+                            </a>
+                        </li>
+
+                        <li class="bg-success-subtle">
+                            <a class="dropdown-item" href="/auth/login">
+                                <i class="bi bi-person"></i>
+                                <sup class="ms-2">login</sup>
+                            </a>
+                        </li>
+
+                        <hr class="dropdown-divider" />
+
+                        <li class="bg-danger-subtle">
+                            <a class="dropdown-item" href="/auth/logout">
+                                <i class="bi bi-person"></i>
+                                <sup class="ms-2">logout</sup>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

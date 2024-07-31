@@ -1,0 +1,53 @@
+<ul class="list-group">
+    <li class="list-group-item"><strong>Steam Account ID:</strong> {{ player.steam_account.id }}</li>
+
+    <li class="list-group-item"><strong>Steam:</strong> <a
+            href="{{ player.steam_account.profile_uri }}">{{ player.id }}</a></li>
+    <li class="list-group-item"><strong>Real
+        Name:</strong> {{ player.steam_account.pro_steam_account.real_name }}
+    </li>
+    <li class="list-group-item"><strong>Time Created:</strong> {{ player.steam_account.time_created }}</li>
+    <li class="list-group-item"><strong>Country Code:</strong> {{ player.steam_account.country_code }}</li>
+    <li class="list-group-item"><strong>State Code:</strong> {{ player.steam_account.state_code }}</li>
+    <li class="list-group-item"><strong>City ID:</strong> {{ player.steam_account.city_id }}</li>
+    <li class="list-group-item"><strong>Community Visible
+        State:</strong> {{ player.steam_account.community_visible_state }}
+    </li>
+    <li class="list-group-item"><strong>Name:</strong> {{ player.steam_account.name }}</li>
+    <li class="list-group-item"><strong>Last Log Off:</strong> {{ player.steam_account.last_log_off }}</li>
+    <li class="list-group-item"><strong>Primary Clan ID:</strong> {{ player.steam_account.primary_clan_id }}
+    </li>
+    <li class="list-group-item"><strong>Solo Rank:</strong> {{ player.steam_account.solo_rank }}</li>
+    <li class="list-group-item"><strong>Party Rank:</strong> {{ player.steam_account.party_rank }}</li>
+    <li class="list-group-item"><strong>Is Dota Plus
+        Subscriber:</strong> {{ player.steam_account.is_dota_plus_subscriber }}
+    </li>
+    <li class="list-group-item"><strong>Dota Plus Original Start
+        Date:</strong> {{ player.steam_account.dota_plus_original_start_date }}</li>
+    <li class="list-group-item"><strong>Is Anonymous:</strong> {{ player.steam_account.is_anonymous }}</li>
+    <li class="list-group-item"><strong>Is Stratz Public:</strong> {{ player.steam_account.is_stratz_public }}
+    </li>
+    <li class="list-group-item"><strong>Season Rank:</strong> {{ player.steam_account.season_rank }}</li>
+    <li class="list-group-item"><strong>Season Leaderboard
+        Rank:</strong> {{ player.steam_account.season_leaderboard_rank }}
+    </li>
+    <li class="list-group-item"><strong>Season Leaderboard Division
+        ID:</strong> {{ player.steam_account.season_leaderboard_division_id }}</li>
+    <li class="list-group-item"><strong>Smurf Flag:</strong> {{ player.steam_account.smurf_flag }}</li>
+    <li class="list-group-item"><strong>Smurf Check Date:</strong> {{ player.steam_account.smurf_check_date }}
+    </li>
+    <li class="list-group-item"><strong>Last Match Date
+        Time:</strong> {{ player.steam_account.last_match_date_time }}
+    </li>
+    <li class="list-group-item"><strong>Last Match Region
+        ID:</strong> {{ player.steam_account.last_match_region_id }}
+    </li>
+    <li class="list-group-item"><strong>Dota Account
+        Level:</strong> {{ player.steam_account.dota_account_level }}
+    </li>
+    <li class="list-group-item"><strong>Rank Shift:</strong> {{ player.steam_account.rank_shift }}</li>
+    <li class="list-group-item"><strong>Bracket:</strong> {{ player.steam_account.bracket }}</li>
+    <li class="list-group-item"><strong>Bracket Basic
+        IDs:</strong> {{ player.steam_account.bracket_basic_ids }}
+    </li>
+</ul>

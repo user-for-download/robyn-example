@@ -1,0 +1,209 @@
+/* These styles are generated from project.scss. */
+body {
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  background-color: #fff;
+  font-weight: 400;
+}
+
+p {
+  color: #b3b3b3;
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+a {
+  -webkit-transition: .3s all ease;
+  -o-transition: .3s all ease;
+  transition: .3s all ease;
+}
+
+a, a:hover {
+  text-decoration: none !important;
+}
+
+.content {
+  padding: 7rem 0;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+.custom-table {
+  min-width: 900px;
+}
+
+.custom-table thead tr, .custom-table thead th {
+  border-top: none;
+  border-bottom: none !important;
+}
+
+.custom-table tbody th, .custom-table tbody td {
+  color: #3b3b3b;
+  padding-bottom: 1px;
+  padding-top: 1px;
+  font-weight: 450;
+}
+
+.custom-table tbody th small, .custom-table tbody td small {
+  color: #b3b3b3;
+  font-weight: 400;
+}
+
+.custom-table tbody .persons {
+  padding: 0;
+  margin: 2px;
+}
+
+.custom-table tbody .persons li {
+  padding: 0;
+  margin: 0 0 0 -10px;
+  list-style: none;
+  display: inline-block;
+}
+
+.custom-table tbody .persons li a {
+  display: inline-block;
+  width: 42px;
+}
+
+/*.custom-table tbody .persons li a img {*/
+/*  border-radius: 25%;*/
+/*  max-width: 100%;*/
+/*  padding-left: 3px;*/
+/*  padding-right: 3px;*/
+/*}*/
+
+.custom-table tbody tr th, .custom-table tbody tr td {
+  position: relative;
+  -webkit-transition: .3s all ease;
+  -o-transition: .3s all ease;
+  transition: .3s all ease;
+}
+
+.custom-table tbody tr th:before, .custom-table tbody tr th:after, .custom-table tbody tr td:before, .custom-table tbody tr td:after {
+  -webkit-transition: .3s all ease;
+  -o-transition: .3s all ease;
+  transition: .3s all ease;
+  content: "";
+  left: 0;
+  right: 0;
+  position: absolute;
+  height: 1px;
+  background: rgba(147, 168, 223, 0.01);
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.custom-table tbody tr th:before, .custom-table tbody tr td:before {
+  top: -1px;
+}
+
+.custom-table tbody tr th:after, .custom-table tbody tr td:after {
+  bottom: -1px;
+}
+
+.custom-table tbody tr:hover th, .custom-table tbody tr:hover td {
+  background: rgba(0, 27, 255, 0.17);
+}
+
+.custom-table tbody tr:hover th:before, .custom-table tbody tr:hover th:after, .custom-table tbody tr:hover td:before, .custom-table tbody tr:hover td:after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.custom-table tbody tr.active th, .custom-table tbody tr.active td {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.custom-table tbody tr.active th:before, .custom-table tbody tr.active th:after, .custom-table tbody tr.active td:before, .custom-table tbody tr.active td:after {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.alert-debug {
+  color: black;
+  background-color: white;
+  border-color: #d6e9c6;
+}
+
+.alert-error {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+
+.hero-image {
+  object-fit: cover;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-left: -0.25rem;
+  margin-right: -0.25rem;
+  border-width: 2px;
+  border-color: white;
+  transition: transform 0.2s;
+  border-radius: 50%;
+}
+
+.hero-image:hover {
+  transform: scale(1.25);
+}
+
+.hero-image-dark {
+  border-color: #4a5568;
+}
+
+.chartBox-wrapper {
+  display: grid;
+  place-items: center;
+
+}
+
+.chartBox {
+  /* Optional: Adjust the width of the chartBox */
+  width: 75%;
+}
+
+.node circle {
+  stroke: #999;
+  stroke-width: 3px;
+}
+
+.node circle:hover {
+  transition: transform 0.3s;
+  transform: scale(1.25);
+}
+
+.node {
+  cursor: pointer;
+}
+
+.node text {
+  pointer-events: none;
+  font-size: 10px;
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: 0.6;
+}
+
+.highlighted-link {
+  stroke: #ff0000;
+  stroke-opacity: 1.0;
+}
+
+.highlighted-node {
+  stroke: rgba(67, 64, 64, 0.56);
+  stroke-width: 2px;
+  transition: transform 0.3s;
+  transform: scale(1.25);
+}
+
+

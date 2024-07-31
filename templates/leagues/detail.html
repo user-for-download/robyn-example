@@ -1,0 +1,237 @@
+{% extends "main.html" %}
+
+{% block title %}
+    League: {{ league.display_name }}
+{% endblock title %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <article>
+                    <header class="mb-4">
+                        <h1 class="fw-bolder mb-1">{{ league.display_name }}</h1>
+                        <div class="text-muted fst-italic mb-2">Start on {{ league.get_verbose_start_datetime() }}</div>
+                        <a class="badge bg-secondary text-decoration-none link-light" href="#">Dota 2</a>
+                        <a class="badge bg-secondary text-decoration-none link-light"
+                           href="#">Tier {{ league.tier }}</a>
+                    </header>
+                </article>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle"
+                                 src="https://icons.iconarchive.com/icons/uiconstock/e-commerce/256/e-commerce-icon-icon.png"
+                                 alt="User profile picture">
+                        </div>
+                        <h3 class="profile-username text-center">{{ league.display_name }}</h3>
+                        <p class="text-muted text-center">{{ league.description }}</p>
+                        {% if auth %}
+                            <div class="d-flex justify-content-center input-group">
+                                <form method="post" action="/league/{{ league.id }}/u">
+                                    <button type="submit" class="btn btn-primary m-2">Update Data</button>
+                                </form>
+                            </div>
+                        {% endif %}
+                        <ul class="list-group list-group-unbordered mb-3">
+
+                            <li class="list-group-item">
+                                <b>Base Prize</b> <span class="float-end">{{ league.base_prize_pool }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Prize</b> <span class="float-end">{{ league.prize_pool }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Region</b> <span class="float-end">{{ league.region }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">About</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Venue: {{ league.venue }}</li>
+                            <li class="list-group-item">Private: {{ league.private }}</li>
+                            <li class="list-group-item">City: {{ league.city }}</li>
+                            <li class="list-group-item">Has Live Matches: {{ league.has_live_matches }}</li>
+                            <li class="list-group-item">Last Match Date: {{ league.last_match_date }}</li>
+                            <li class="list-group-item">Pro Circuit Points: {{ league.pro_circuit_points }}</li>
+                            <li class="list-group-item">Banner: {{ league.banner }}</li>
+                            <li class="list-group-item">Stop Sales Time: {{ league.stop_sales_time }}</li>
+                            <li class="list-group-item">Image URI: {{ league.image_uri }}</li>
+                            <li class="list-group-item">End Datetime: {{ league.end_datetime }}</li>
+                            <li class="list-group-item">Start Datetime: {{ league.start_datetime }}</li>
+                            <li class="list-group-item">Status: {{ league.status }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="p-1" id="pr-heroes-bar"></div>
+                <div class="card mb-1">
+                    <div class="card-body">
+                        {% include "matches/includes/match-heroes-chart.html" %}
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <ul class="nav nav-pills" id="list-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link" id="list-home-list" data-bs-toggle="list" href="#list-home"
+                                   role="tab"
+                                   aria-controls="list-home">Teams</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" id="list-profile-list" data-bs-toggle="list"
+                                   href="#list-profile" role="tab"
+                                   aria-controls="list-profile">Series</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="list-messages-list" data-bs-toggle="list" href="#list-messages"
+                                   role="tab"
+                                   aria-controls="list-messages">Picks</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="list-graph-list" data-bs-toggle="list" href="#list-graph"
+                                   role="tab"
+                                   aria-controls="graph-messages">Graph</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane fade" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                                <div class="row">
+                                    <div class="card-group">
+                                        {% for team in teams %}
+                                            <div class="col-4">
+                                                <div class="card m-1">
+                                                    {% if team.logo %}
+                                                        <div class="text-center">
+                                                            <img class="profile-user-img img-fluid img-circle bg-info"
+                                                                 src="{{ team.logo }}" alt="team">
+                                                        </div>
+                                                    {% endif %}
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">
+                                                            <a href="{{ team.get_absolute_url() }}">{{ team.name }}</a>
+                                                        </h5>
+                                                        <p class="card-text">w: {{ team.win_count }},
+                                                            l: {{ team.loss_count }}</p>
+                                                        {% if team.url %}
+                                                            <p class="card-text"><strong>URL:</strong>
+                                                                <a href="{{ team.url }}">{{ team.id }}</a>
+                                                            </p>
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <small class="text-muted">Last
+                                                            at {{ team.get_verbose_last_match_date_time() }}</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade show active" id="list-profile" role="tabpanel"
+                                 aria-labelledby="list-profile-list">
+                                {% for series_obj in series %}
+                                    <div class="col text-center">
+                                        <div id="s{{ series_obj.id }}" class="pt-1">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <div class="row justify-content-around">
+                                                        {% if user.is_authenticated %}
+                                                            <div class="col-auto m-0 p-0 align-self-center">
+                                                                <div id="fetch-details-{{ series_obj.id }}">
+                                                                    <button type="submit" class="btn"
+                                                                            id="fetch-button-{{ series_obj.id }}"
+                                                                            onclick="">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                             width="16" height="16" fill="currentColor"
+                                                                             class="bi bi-bootstrap-reboot border-0"
+                                                                             viewBox="0 0 16 16">
+                                                                            <path
+                                                                                    d="M1.161 8a6.84 6.84 0 1 0 6.842-6.84.58.58 0 1 1 0-1.16 8 8 0 1 1-6.556 3.412l-.663-.577a.58.58 0 0 1 .227-.997l2.52-.69a.58.58 0 0 1 .728.633l-.332 2.592a.58.58 0 0 1-.956.364l-.643-.56A6.8 6.8 0 0 0 1.16 8z"></path>
+                                                                            <path
+                                                                                    d="M6.641 11.671V8.843h1.57l1.498 2.828h1.314L9.377 8.665c.897-.3 1.427-1.106 1.427-2.1 0-1.37-.943-2.246-2.456-2.246H5.5v7.352zm0-3.75V5.277h1.57c.881 0 1.416.499 1.416 1.32 0 .84-.504 1.324-1.386 1.324z"></path>
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
+                                                        <div class="col-auto align-self-center">
+                                                            {{ series_obj.get_verbose_last_match_date_time() }}
+                                                        </div>
+                                                        <div class="col-4 align-self-center text-end">
+                                                            <h5 class="m-0 p-0">{{ series_obj.get_title_team_two() }}</h5>
+                                                        </div>
+                                                        <div class="col-1 align-self-center">
+                                                            {{ series_obj.team_two_win_count }}
+                                                            vs {{ series_obj.team_one_win_count }}
+                                                        </div>
+                                                        <div class="col-4 align-self-center text-start">
+                                                            <h5 class="m-0 p-0">{{ series_obj.get_title_team_one() }}</h5>
+                                                        </div>
+                                                        <div class="col-auto m-0 p-0 align-self-center">
+                                                            <a class="btn" data-bs-toggle="collapse"
+                                                               href="#collapse{{ series_obj.id }}">+</a>
+                                                        </div>
+                                                    </div>
+                                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                                                       Bo{{ series_obj.get_bo_format_name() }}
+                                                        <span class="visually-hidden">format series</span>
+                                                    </span>
+                                                </div>
+                                                <div id="collapse{{ series_obj.id }}" class="collapse"
+                                                     data-bs-parent="s{{ series_obj.id }}">
+                                                    <div class="card-body p-0 m-0">
+                                                        {{ series_obj.matches|length }}
+                                                        {% with matches=series_obj.matches %}
+                                                            {% include "matches/includes/match-tables.html" %}
+                                                        {% endwith %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="tab-pane fade" id="list-messages" role="tabpanel"
+                                 aria-labelledby="list-messages-list">
+                                pie_chart_heroes
+                            </div>
+                            <div class="tab-pane fade" id="list-graph" role="tabpanel"
+                                 aria-labelledby="list-graph-list">
+                                graph_picks
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block script %}
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+            await fetchDataAndCreateCharts("type_obj=league&id_obj={{ league.id }}", 'pr-heroes-bar').then(data => {
+                if (data) {
+                    createBarChart("#heroes-bar-chart", data?.nodes_picks);
+                    createBarChart("#heroes-bar-chart-bans", data?.nodes_bans);
+                } else {
+                    console.error('Error fetching heroes data:', data.error);
+                }
+            });
+        })
+    </script>
+{% endblock %}

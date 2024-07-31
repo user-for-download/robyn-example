@@ -1,0 +1,160 @@
+{% extends "main.html" %}
+
+
+{% block title %}
+    Team: {{ team.name }}
+{% endblock title %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <article>
+                    <header class="mb-4">
+                        <h1 class="fw-bolder mb-1">{{ team.name }} - {{ team.tag }}</h1>
+                        <div class="text-muted fst-italic mb-2">Last on: {{ team.last_match_date_time }}</div>
+                        <span class="badge bg-secondary text-decoration-none link-light">W: {{ team.win_count }}</span>
+                        <span class="badge bg-secondary text-decoration-none link-light">L: {{ team.loss_count }}</span>
+                    </header>
+                </article>
+            </div>
+        </div>
+        <div class="row pt-3">
+            <div class="col-md-4">
+                {% include 'teams/includes/team_info.html' %}
+            </div>
+            <div class="col-md-8">
+                <div class="p-1" id="pr-heroes-bar-team"></div>
+                <div class="card mb-1">
+                    <div class="card-body">
+                        {% include 'matches/includes/match-heroes-chart.html' %}
+                    </div>
+                </div>
+                {% if heroes %}
+                    <div id="heroes" class="pt-1">
+                        <div class="card">
+                            <div class="card-header">
+                                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseHeroes">
+                                    Popular Heroes
+                                </a>
+                            </div>
+                            <div id="collapseHeroes" class="collapse" data-bs-parent="#leagues">
+                                <div class="card-body">
+                                    pie_chart_heroes.html
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="picks" class="pt-1">
+                        <div class="card">
+                            <div class="card-header">
+                                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapsePicks">
+                                    Picks
+                                </a>
+                            </div>
+                            <div id="collapsePicks" class="collapse" data-bs-parent="#leagues">
+                                <div class="card-body">
+                                    graph_picks
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                <div id="members" class="pt-1">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseMembers">
+                                Current Team Members
+                            </a>
+                        </div>
+                        <div id="collapseMembers" class="collapse" data-bs-parent="#leagues">
+                            <div class="card-body">
+                                {% with members=members[:5] %}
+                                    {% include "teams/includes/team_members.html" %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="members-old" class="pt-1">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseMembersOld">
+                                Old Team Members
+                            </a>
+                        </div>
+                        <div id="collapseMembersOld" class="collapse" data-bs-parent="#leagues">
+                            <div class="card-body">
+                                {% with members=members[5:] %}
+                                    {% include "teams/includes/team_members.html" %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if leagues %}
+                    <div id="team-leagues" class="pt-1">
+                        <div class="card">
+                            <div class="card-header">
+                                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseTeamLeagues">
+                                    Leagues racing
+                                </a>
+                            </div>
+                            <div id="collapseTeamLeagues" class="collapse" data-bs-parent="#leagues">
+                                <div class="card-body">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center" scope="col">Id</th>
+                                            <th scope="col">Name</th>
+                                            <th class="text-center" scope="col">Tier</th>
+                                            <th class="text-center" scope="col">Status</th>
+                                            <th class="text-center" scope="col">Prize</th>
+                                            <th class="text-center" scope="col">Updated</th>
+                                            <th class="text-center" scope="col">Start</th>
+                                            <th class="text-center" scope="col">End</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for league in leagues %}
+                                            <tr {% if league.end_datetime %} class="table-primary" {% endif %}>
+                                                <th scope="row"><a
+                                                        href="{{ league.get_absolute_url() }}">{{ league.id }}</a></th>
+                                                <td>{{ league.display_name }}</td>
+                                                <td {% if league.tier > 1 %}
+                                                    class="table-warning"{% endif %}>{{ league.tier }}</td>
+                                                <td>{{ league.status }}</td>
+                                                <td>{{ league.prize_pool }}</td>
+                                                <td>{{ league.get_last_update() }}</td>
+                                                <td>{{ league.get_verbose_start_datetime() }}</td>
+                                                <td>{{ league.get_verbose_end_datetime() }}</td>
+
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block script %}
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetchDataAndCreateCharts("type_obj=team&id_obj={{ team.id }}", 'pr-heroes-bar-team').then(data => {
+                if (data) {
+                    createBarChart("#heroes-bar-chart", data?.nodes_picks);
+                    createBarChart("#heroes-bar-chart-bans", data?.nodes_bans);
+                } else {
+                    console.error('Error fetching heroes data:', data.error);
+                }
+            });
+        })
+    </script>
+{% endblock %}

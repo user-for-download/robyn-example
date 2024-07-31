@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>
+        {% block title %}
+            robin
+        {% endblock title %}
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="robin"/>
+    <meta name="author" content="Ivan P"/>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css"
+          integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"/>
+    <link href="/static/css/style.css" rel="stylesheet">
+    <script>
+        // Capture the start time when the page starts loading
+        const startTime = performance.now();
+
+        // Function to calculate the page load time
+        function calculateLoadTime() {
+            const endTime = performance.now();
+            const loadTime = (endTime - startTime).toFixed(2);
+            document.getElementById('load-time').innerText = `Page load time: ${loadTime} ms`;
+        }
+
+        window.addEventListener('load', calculateLoadTime);
+    </script>
+    <!-- Bootstrap JS -->
+    <script defer
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"
+            integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+            crossorigin="anonymous">
+    </script>
+    <script defer src="https://rb.binetc.site/static/js/main.js"></script>
+</head>
+<body class="{% block bodyclass %}{% endblock bodyclass %}">
+{% block body %}
+    <div id="load-time"
+         style="position: fixed; bottom: 10px; right: 10px; background: #f8f9fa; padding: 5px; border: 1px solid #ddd; border-radius: 5px;">
+        Page load time: calculating...
+    </div>
+    <div class="mb-1">
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler navbar-toggler-right"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="/">Robyn</a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/">Home <span
+                                    class="visually-hidden">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/count">Count</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a id="sign-up-link" class="nav-link"
+                               href="/league/list">leagues</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="sign-up-link" class="nav-link"
+                               href="/team/list">teams</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="sign-up-link" class="nav-link"
+                               href="/match/list">matches</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="sign-up-link" class="nav-link"
+                               href="/player/list">players</a>
+                        </li>
+                        {% if auth %}
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   href="/auth/detail">My Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/auth/logout">Sign Out</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a id="sign-up-link" class="nav-link"
+                                   href="/auth/login">Sign In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="log-in-link" class="nav-link"
+                                   href="/auth/register">Sign Up</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                    {{ message }}
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% block main %}
+            {% block content %}
+                <p>Use this document as a way to quick start any new project.</p>
+            {% endblock content %}
+        {% endblock main %}
+    </div>
+{% endblock %}
+<!-- /container -->
+{% block modal %} {% endblock %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+{% block script %}{% endblock %}
+</body>
+</html>

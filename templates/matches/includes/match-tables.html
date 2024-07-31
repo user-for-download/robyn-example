@@ -1,0 +1,52 @@
+<div class="table-responsive p-0 m-0">
+    <table class="table custom-table">
+        <thead>
+        <tr class="p-0">
+            <th class="p-0">at</th>
+            <th class="p-0">Match ID</th>
+            <th class="p-0">Dur</th>
+            <th class="p-0">Dire Team</th>
+            <th class="p-0">Dire Picks</th>
+            <th class="p-0">D k</th>
+            <th class="p-0"></th>
+            <th class="p-0">Rk</th>
+            <th class="p-0">Radiant Picks</th>
+            <th class="p-0">Radiant Team</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for match in matches|sort(attribute='id', reverse = True) %}
+            <tr>
+                <td class="align-middle text-center p-0">
+                    {{ match.get_verbose_end_date_time() }}
+                </td>
+                <td class="align-middle text-center p-0">
+                    <a href="{{ match.get_absolute_url() }}">{{ match.id }}</a>
+                </td>
+                <td class="align-middle text-center p-0">{{ match.get_verbose_duration_seconds() }}</td>
+                <td class="align-middle text-center{% if not match.did_radiant_win %}table-success{% endif %}">
+                    <a href="{{ match.dire_team.get_absolute_url() }}">{{ match.dire_team.name }}</a>
+                </td>
+                <td class="align-middle text-center p-0">
+                    {% with picks=match.pick_bans, is_radiant=False %}
+                        {% include "matches/includes/match-heroes-picks.html" %}
+                    {% endwith %}
+                </td>
+                <td class="align-middle text-end p-0">{{ match.get_count_dire_kills() }}</td>
+                <td class="align-middle text-center px-1">:</td>
+                <td class="align-middle text-start pr-1 p-0">{{ match.get_count_radiant_kills() }}</td>
+                <td class="align-middle text-center p-0">
+                    {% with picks=match.pick_bans, is_radiant=True %}
+                        {% include "matches/includes/match-heroes-picks.html" %}
+                    {% endwith %}
+                </td>
+                <td class="align-middle text-center {% if match.did_radiant_win %}table-success{% endif %}">
+                    <a href="{{ match.radiant_team.get_absolute_url() }}">
+                        {{ match.radiant_team.name }}
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

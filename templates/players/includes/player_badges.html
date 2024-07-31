@@ -1,0 +1,6 @@
+{% for badge in player.badges %}
+    <li><a class="dropdown-item">Badge ID:
+        {{ badge.badge_id }} - Created Date:
+        {{ badge.created_at }}</a>
+    </li>
+{% endfor %}

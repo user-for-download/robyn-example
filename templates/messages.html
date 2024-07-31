@@ -1,0 +1,15 @@
+{% extends "main.html" %}
+
+
+{% block content %}
+{% if request.query_params["msg"] %}
+<div class="container">
+<h1 class="lead my-3">messages</h1> 
+<span>
+    messages: {{ request.query_params["msg"] }}
+</span>
+<hr>
+<a class="page-link my-3" href="/">home</a> 
+</div>
+{% endif %}
+{% endblock %}

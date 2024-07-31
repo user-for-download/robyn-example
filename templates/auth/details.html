@@ -1,0 +1,56 @@
+
+{% extends "main.html" %}
+{% block title %} user detail {{ user.id }} {% endblock %}
+
+{% block content %}
+
+<h1 class="lead my-3">detail user.. {{ user.email }}</h1>
+
+<div class="card p-3">
+
+    <ul class="card-header list-group list-group-horizontal">
+        <li class="list-group-item pt-3">
+            <sup class="float-start">id:</sup>
+            {{ user.id }}
+        </li>
+        <li class="list-group-item pt-3">
+            <sup class="float-start">name:</sup>
+            {{ user.name }}
+        </li>
+        <li class="list-group-item pt-3">
+            <sup class="float-start">email:</sup>
+            {{ user.email }}
+        </li>
+    </ul>
+
+    <ul class="card-body list-group list-group-flush">
+        {% include "created_modified.html" %}
+    </ul>
+
+    {% if user.file %}
+    <div class="card-footer">
+    <img class="shadow-sm mb-2" src="{{ user.file }}" alt="img">
+    </div>
+    {% endif %}
+
+</div>
+
+<div class="card mt-2">
+    <div class="card-header">
+        <a class="btn btn-outline-primary btn-sm me-2" href="/auth/update-str/{{ user.id }}" role="button">
+            <i class="bi bi-pencil"></i> &raquo; srr
+        </a>
+        <a class="btn btn-outline-primary btn-sm me-2" href="/auth/update-img/{{ user.id }}" role="button">
+            <i class="bi bi-pencil"></i> &raquo; img
+        </a>
+        <a class="btn btn-outline-primary btn-sm me-2" href="/auth/update-del/{{ user.id }}" role="button">
+            <i class="bi bi-pencil"></i> &raquo; del img
+        </a>
+        <a class="btn btn-outline-danger btn-sm" href="/auth/delete/{{ user.id }}" role="button">
+            <i class="bi bi-trash3"></i> &raquo;
+        </a>
+    </div>
+</div>
+
+
+{% endblock %}

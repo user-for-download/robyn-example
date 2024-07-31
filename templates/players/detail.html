@@ -1,0 +1,161 @@
+{% extends "main.html" %}
+
+{% block title %}
+    {{ player.id or '' }} - {{ player.steam_account.name or '' }}
+{% endblock title %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <article>
+                    <header class="mb-4">
+                        <h1 class="fw-bolder mb-1">{{ player.steam_account.pro_steam_account.name }}
+                            / {{ player.steam_account.pro_steam_account.real_name }}</h1>
+                        <div class="text-muted fst-italic mb-2">Last
+                            on: {{ player.steam_account.get_verbose_last_match_date_time() }}</div>
+                        <span
+                                class="badge bg-secondary text-decoration-none link-light">s: {{ player.steam_account.solo_rank }}</span>
+                        <span
+                                class="badge bg-secondary text-decoration-none link-light">p: {{ player.steam_account.party_rank }}</span>
+                    </header>
+                </article>
+            </div>
+        </div>
+
+        <!-- Dropdown Buttons -->
+        <div class="row">
+            <div class="col-sm-12 p-1 d-flex justify-content-center align-items-center">
+                <div class="btn-group m-1">
+                    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        View Badges
+                    </button>
+                    <ul class="dropdown-menu">
+                        {% include "players/includes/player_badges.html" %}
+                    </ul>
+                </div>
+                <!-- View Battle Passes -->
+                <div class="btn-group m-1">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        View Battle Passes
+                    </button>
+                    <ul class="dropdown-menu">
+                        {% include "players/includes/player_battle_passes.html" %}
+                    </ul>
+                </div>
+                <!-- Season Ranks -->
+                <div class="btn-group m-1">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        Season Ranks
+                    </button>
+                    <ul class="dropdown-menu">
+                        {% include "players/includes/player_ranks.html" %}
+                    </ul>
+                </div>
+                <!-- Previous Names -->
+                <div class="btn-group m-1">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        Previous Names
+                    </button>
+                    <ul class="dropdown-menu">
+                        {% include "players/includes/player_names.html" %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Profile -->
+    <div class="row pt-3">
+        <div class="col-md-4">
+            <div class="card card-primary card-outline">
+                <div class="card-body box-profile">
+                    <div class="text-center">
+                        <img class="profile-user-img img-fluid img-circle"
+                             src="{{ player.steam_account.avatar or
+                              'https://icons.iconarchive.com/icons/uiconstock/e-commerce/256/e-commerce-icon-icon.png' }}"
+                             alt="User profile picture">
+                    </div>
+                    <h3 class="profile-username text-center">{{ player.steam_account.pro_steam_account.name }}</h3>
+                    <p class="text-muted text-center">{{ player.steam_account.pro_steam_account.real_name }}</p>
+                    <div class="col-sm-12 text-center">
+                        {% if auth %}
+                            <div class="d-flex justify-content-center input-group">
+                                <form method="post" action="/player/{{ player.id }}/u">
+                                    <button type="submit" class="btn btn-primary m-2">Update Data</button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% include "players/includes/player_info.html" %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="col-md-8">
+            <div class="p-1" id="pr-heroes-bar-player"></div>
+            <div class="card mb-1">
+                <div class="card-body">
+                    {% include "matches/includes/match-heroes-chart.html" %}
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="list-group" id="list-tab" role="tablist">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item">
+                                <a class="nav-link" id="list-home-list" data-bs-toggle="list" href="#list-home"
+                                   role="tab"
+                                   aria-controls="list-home">Pro</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" id="list-profile-list" data-bs-toggle="list"
+                                   href="#list-profile" role="tab"
+                                   aria-controls="list-profile">Matches</a>
+                            </li>
+                            {% if  player.team %}
+                                <li class="nav-item">
+                                    <a class="nav-link" id="list-team-list" data-bs-toggle="list" href="#list-team"
+                                       role="tab"
+                                       aria-controls="list-home">{{ player.team or 0 }}</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <!-- Pro Info -->
+                        {% include "players/includes/player_pro.html" %}
+                        <!-- Match List -->
+                        {% include "players/includes/player_matches.html" %}
+                        <!-- Team Info -->
+                        {% include "players/includes/player_team.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetchDataAndCreateCharts("type_obj=player&id_obj={{ player.id }}", 'pr-heroes-bar-player')
+                .then(data => {
+                    if (data) {
+                        createBarChart("#heroes-bar-chart", data?.nodes_picks);
+                    } else {
+                        console.error('Error fetching heroes data:', data.error);
+                    }
+                });
+        })
+    </script>
+{% endblock %}

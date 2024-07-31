@@ -1,0 +1,54 @@
+<div class="card card-primary card-outline">
+    <div class="card-body box-profile">
+        {% if team.logo %}
+            <div class="text-center">
+                <img class="profile-user-img img-fluid img-circle bg-info" src="{{ team.logo }}"
+                     alt="User profile picture">
+            </div>
+        {% endif %}
+        <h3 class="profile-username text-center">{{ team.name }}</h3>
+        <p class="text-muted text-center">{{ team.id }}</p>
+        <div class="col-sm-12 text-center">
+            {% if auth %}
+                <div class="d-flex justify-content-center input-group">
+                    <form method="POST" action="/team/{{ team.id }}/u">
+                        <button type="submit" class="btn btn-primary m-2">Update Team</button>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item"><strong>Created:</strong> {{ team.date_created }}</li>
+            <li class="list-group-item"><strong>Name:</strong> {{ team.name }}</li>
+            <li class="list-group-item"><strong>Tag:</strong> {{ team.tag }}</li>
+            <li class="list-group-item"><strong>Date Created:</strong> {{ team.date_created }}</li>
+            <li class="list-group-item"><strong>Is Professional:</strong> {{ team.is_pro }}</li>
+            <li class="list-group-item"><strong>Is Locked:</strong> {{ team.is_locked }}</li>
+            <li class="list-group-item"><strong>Country Code:</strong> {{ team.country_code }}</li>
+            {% if team.url %}
+                <li class="list-group-item"><strong>URL:</strong> <a href="{{ team.url }}">{{ team.id }}</a></li>
+            {% endif %}
+            {% if team.base_logo %}
+                <li class="list-group-item"><strong>Base Logo:</strong> <img src="{{ team.base_logo }}" alt="Base Logo">
+                </li>
+            {% endif %}
+            {% if team.banner_logo %}
+                <li class="list-group-item"><strong>Banner Logo:</strong> <img src="{{ team.banner_logo }}"
+                                                                               alt="Banner Logo"></li>
+            {% endif %}
+            {% if team.sponsor_logo %}
+                <li class="list-group-item"><strong>Sponsor Logo:</strong> <img src="{{ team.sponsor_logo }}"
+                                                                                alt="Sponsor Logo"></li>
+            {% endif %}
+            <li class="list-group-item"><strong>Win Count:</strong> {{ team.win_count }}</li>
+            <li class="list-group-item"><strong>Loss Count:</strong> {{ team.loss_count }}</li>
+            <li class="list-group-item"><strong>Rank:</strong> {{ team.rank }}</li>
+            <li class="list-group-item"><strong>Last Match Date
+                Time:</strong> {{ team.get_verbose_last_match_date_time() }}</li>
+            <li class="list-group-item"><strong>Coach Steam Account ID:</strong> {{ team.coach_steam_account_id }}
+            </li>
+            <li class="list-group-item"><strong>Is Followed:</strong> {{ team.is_followed }}</li>
+            <li class="list-group-item"><strong>Country Name:</strong> {{ team.country_name }}</li>
+        </ul>
+    </div>
+</div>

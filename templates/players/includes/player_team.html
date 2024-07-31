@@ -1,0 +1,51 @@
+<div class="tab-pane fade show" id="list-team" role="tabpanel"
+     aria-labelledby="list-team-list">
+    <div>
+        {% if player.team.team %}
+            <div class="col">
+                <h2><a href="{{ player.team.team.get_absolute_url() }}">{{ player.team.team.name }}</a></h2>
+                <ul class="list-group mt-3">
+                    <li class="list-group-item"><strong>ID:</strong> {{ player.team.team.id }}</li>
+                    <li class="list-group-item"><strong>Name:</strong> {{ player.team.team.name }}</li>
+                    <li class="list-group-item"><strong>Tag:</strong> {{ player.team.team.tag }}</li>
+                    <li class="list-group-item"><strong>Date Created:</strong> {{ player.team.team.date_created }}
+                    </li>
+                    <li class="list-group-item"><strong>Is Professional:</strong> {{ player.team.team.is_pro }}</li>
+                    <li class="list-group-item"><strong>Is Locked:</strong> {{ player.team.team.is_locked }}</li>
+                    <li class="list-group-item"><strong>Country Code:</strong> {{ player.team.team.country_code }}
+                    </li>
+                    <li class="list-group-item"><strong>URL:</strong> <a
+                            href="{{ player.team.team.url }}">{{ player.team.team.url }}</a></li>
+                    <li class="list-group-item"><strong>Logo:
+                    </strong> <img src="{{ player.team.team.logo }}" alt="Team Logo">
+                    </li>
+                    <li class="list-group-item"><strong>Base Logo:</strong> <img
+                            src="
+                                    {{ player.team.team.base_logo or 'https://icons.iconarchive.com/icons/uiconstock/e-commerce/256/e-commerce-icon-icon.png' }}"
+                            alt="Base Logo"></li>
+                    <li class="list-group-item"><strong>Banner Logo:</strong> <img
+                            src="
+                                    {{ player.team.team.banner_logo or 'https://icons.iconarchive.com/icons/uiconstock/e-commerce/256/e-commerce-icon-icon.png' }}"
+                            alt="Banner Logo">
+                    </li>
+                    <li class="list-group-item"><strong>Sponsor Logo:</strong> <img
+                            src="
+                                    {{ player.team.team.sponsor_logo or 'https://icons.iconarchive.com/icons/uiconstock/e-commerce/256/e-commerce-icon-icon.png' }}"
+                            alt="Sponsor Logo"></li>
+                    <li class="list-group-item"><strong>Win Count:</strong> {{ player.team.team.win_count }}</li>
+                    <li class="list-group-item"><strong>Loss Count:</strong> {{ player.team.team.loss_count }}</li>
+                    <li class="list-group-item"><strong>Rank:</strong> {{ player.team.team.rank }}</li>
+                    <li class="list-group-item"><strong>Last Match Date
+                        Time:</strong> {{ player.team.team.last_match_date_time }}
+                    </li>
+                    <li class="list-group-item"><strong>Coach Steam Account
+                        ID:</strong> {{ player.team.team.coach_steam_account_id }}</li>
+                    <li class="list-group-item"><strong>Is Followed:</strong> {{ player.team.team.is_followed }}
+                    </li>
+                    <li class="list-group-item"><strong>Country Name:</strong> {{ player.team.team.country_name }}
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,9 @@
+{% for bp in player.battle_passes %}
+    <li>
+        <a class="dropdown-item">
+            Event ID: {{ bp.event_id }} -
+            Level: {{ bp.level }} -
+            bracket: {{ bp.bracket }}
+        </a>
+    </li>
+{% endfor %}

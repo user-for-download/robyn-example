@@ -1,0 +1,20 @@
+{% extends "main.html" %}
+{% block title %} pwd vrf {% endblock %}
+
+{% block content %}
+
+
+    <div class="row msg">
+        {% if msg %}
+            <div>
+                {{ msg }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div>
+        <a href="{{ token }}">vrf</a>
+    </div>
+
+
+{% endblock %}

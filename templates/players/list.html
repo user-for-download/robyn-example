@@ -1,0 +1,48 @@
+{% extends "main.html" %}
+
+
+{% block title %}
+  players: {{ players|length }}
+{% endblock title %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 p-2">
+        <div class="col-sm-12 p-4 text-center">
+          <h1>Players</h1>
+          {% if auth %}
+            <form method="POST" action="/player/update">
+              <button type="submit" class="btn btn-primary m-2">Get Players</button>
+            </form>
+          {% endif %}
+        </div>
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th class="text-center" scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Real Name</th>
+            <th class="text-center" scope="col">match_count</th>
+            <th class="text-center" scope="col">win_count</th>
+            <th class="text-center" scope="col">f date</th>
+            <th class="text-center" scope="col">update</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for player in players %}
+            <tr {% if player.steam_account.smurfFlag %} class="table-primary" {% endif %}>
+              <th scope="row"><a href="{{ player.get_absolute_url() }}">{{ player.id }}</a></th>
+              <td>{{ player.steam_account.name }}</td>
+              <td>{{ player.steam_account.get_real_name() }}</td>
+              <td>{{ player.match_count }}</td>
+              <td>{{ player.win_count }}</td>
+              <td>{{ player.steam_account.get_verbose_last_match_date_time()}}</td>
+              <td>{{ player.get_last_update() }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

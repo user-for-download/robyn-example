@@ -1,0 +1,32 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th>Steam Account ID</th>
+        <th>Steam Account Name</th>
+        <th>First Match ID</th>
+        <th>First Match Date Time</th>
+        <th>Last Match ID</th>
+        <th>Last Match Date Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for member in members %}
+        <tr>
+            <th scope="row">
+                <a href="{{ member.get_absolute_url() }}">{{ member.steam_account_id }}</a>
+            </th>
+            <td>
+                <span class="d-inline-block text-truncate" style="max-width: 150px;">{{ member.steam_account }}</span>
+            </td>
+            <th scope="row"><a
+                    href="{{ member.get_url_first_match() }}">{{ member.first_match_id }}</a>
+            </th>
+            <td>{{ member.get_verbose_first_match_date_time() }}</td>
+            <th scope="row"><a
+                    href="{{ member.get_url_last_match() }}">{{ member.last_match_id }}</a>
+            </th>
+            <td>{{ member.get_verbose_last_match_date_time() }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

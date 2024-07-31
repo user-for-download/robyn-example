@@ -1,0 +1,12 @@
+<ul class="persons">
+    {% for pick in picks if pick.is_pick %}
+        {% if pick.is_radiant == is_radiant %}
+            <li>
+                <a href="#">
+                    <img class="hero-image {% if pick.is_radiant %}hero-image-radiant{% else %}hero-image-dark{% endif %}"
+                         src="{{ pick.hero_image_url() }}" alt="{{ pick.hero_id }}">
+                </a>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>

@@ -1,0 +1,39 @@
+{% extends "main.html" %}
+
+{% block title %}
+    matches: {{ matches|length }}
+{% endblock title %}
+{% block content %}
+    <div class="container">
+        <div class="row p-2">
+            <div class="col text-center">
+                <div class="p-1" id="pr-heroes-bar-matches"></div>
+                <div class="card mb-1">
+                    <div class="card-body">
+                        {% include 'matches/includes/match-heroes-chart.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row p-2">
+            {% with matches=matches %}
+                {% include "matches/includes/match-tables.html" %}
+            {% endwith %}
+        </div>
+    </div>
+{% endblock content %}
+{% block script %}
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetchDataAndCreateCharts("type_obj=all&id_obj=1", 'pr-heroes-bar-matches').then(data => {
+                if (data) {
+                    createBarChart("#heroes-bar-chart", data?.nodes_picks);
+                    createBarChart("#heroes-bar-chart-bans", data?.nodes_bans);
+                } else {
+                    console.error('Error fetching heroes data:', data.error);
+                }
+            });
+        })
+    </script>
+{% endblock script %}

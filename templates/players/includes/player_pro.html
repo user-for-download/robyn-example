@@ -1,0 +1,57 @@
+<div class="tab-pane fade" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+  <div>
+    <ul class="list-group mt-3">
+      <li class="list-group-item"><strong>Real Name:</strong> {{ player.steam_account.pro_steam_account.real_name }}
+      </li>
+      <li class="list-group-item"><strong>Fantasy
+        Role:</strong> {{ player.steam_account.pro_steam_account.fantasy_role }}</li>
+      <li class="list-group-item"><strong>Team ID:</strong> {{ player.steam_account.pro_steam_account.team_id }}</li>
+      <li class="list-group-item"><strong>Sponsor:</strong> {{ player.steam_account.pro_steam_account.sponsor }}</li>
+      <li class="list-group-item"><strong>Is Locked:</strong> {{ player.steam_account.pro_steam_account.is_locked }}
+      </li>
+      <li class="list-group-item"><strong>Is Pro:</strong> {{ player.steam_account.pro_steam_account.is_pro }}</li>
+      <li class="list-group-item"><strong>Total
+        Earnings:</strong> {{ player.steam_account.pro_steam_account.total_earnings }}</li>
+      <li class="list-group-item"><strong>Birthday:</strong> {{ player.steam_account.pro_steam_account.birthday }}</li>
+      <li class="list-group-item"><strong>Romanized Real
+        Name:</strong> {{ player.steam_account.pro_steam_account.romanized_real_name }}</li>
+      <li class="list-group-item"><strong>Roles:</strong> {{ player.steam_account.pro_steam_account.roles }}</li>
+      <li class="list-group-item"><strong>Twitter Link:</strong>
+        {% if player.steam_account.pro_steam_account.twitter_link %}
+          <a href="{{ player.steam_account.pro_steam_account.twitter_link }}"
+             target="_blank">{{ player.steam_account.pro_steam_account.twitter_link }}</a>{% else %}N/A{% endif %}</li>
+      <li class="list-group-item"><strong>Twitch Link:</strong>
+        {% if player.steam_account.pro_steam_account.twitch_link %}
+          <a href="{{ player.steam_account.pro_steam_account.twitch_link }}"
+             target="_blank">{{ player.steam_account.pro_steam_account.twitch_link }}</a>{% else %}N/A{% endif %}</li>
+      <li class="list-group-item"><strong>Instagram Link:</strong>
+        {% if player.steam_account.pro_steam_account.instagram_link %}
+          <a href="{{ player.steam_account.pro_steam_account.instagram_link }}"
+             target="_blank">{{ player.steam_account.pro_steam_account.instagram_link }}</a>{% else %}N/A{% endif %}
+      </li>
+      <li class="list-group-item"><strong>VK Link:</strong> {% if player.steam_account.pro_steam_account.vk_link %}
+        <a href="{{ player.steam_account.pro_steam_account.vk_link }}"
+           target="_blank">{{ player.steam_account.pro_steam_account.vk_link }}</a>{% else %}N/A{% endif %}</li>
+      <li class="list-group-item"><strong>YouTube Link:</strong>
+        {% if player.steam_account.pro_steam_account.you_tube_link %}
+          <a href="{{ player.steam_account.pro_steam_account.you_tube_link }}"
+             target="_blank">{{ player.steam_account.pro_steam_account.you_tube_link }}</a>{% else %}N/A{% endif %}</li>
+      <li class="list-group-item"><strong>Facebook Link:</strong>
+        {% if player.steam_account.pro_steam_account.facebook_link %}
+          <a href="{{ player.steam_account.pro_steam_account.facebook_link }}"
+             target="_blank">{{ player.steam_account.pro_steam_account.facebook_link }}</a>{% else %}N/A{% endif %}</li>
+      <li class="list-group-item"><strong>Weibo Link:</strong>
+        {% if player.steam_account.pro_steam_account.weibo_link %}
+          <a href="{{ player.steam_account.pro_steam_account.weibo_link }}"
+             target="_blank">{{ player.steam_account.pro_steam_account.weibo_link }}</a>{% else %}N/A{% endif %}</li>
+      <li class="list-group-item"><strong>Signature
+        Heroes:</strong> {{ player.steam_account.pro_steam_account.signature_heroes }}</li>
+      <li class="list-group-item"><strong>Countries:</strong> {{ player.steam_account.pro_steam_account.countries }}
+      </li>
+      <li class="list-group-item"><strong>TI Wins:</strong> {{ player.steam_account.pro_steam_account.ti_wins }}</li>
+      <li class="list-group-item"><strong>Is TI
+        Winner:</strong> {{ player.steam_account.pro_steam_account.is_ti_winner }}</li>
+      <li class="list-group-item"><strong>Position:</strong> {{ player.steam_account.pro_steam_account.position }}</li>
+    </ul>
+  </div>
+</div>

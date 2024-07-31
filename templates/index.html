@@ -1,0 +1,69 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+
+<h1 class="container h6">
+    Hello, world..! {% if i %}{{ user.email }}{% endif %}
+</h1>
+
+<div class="container">
+<a class="float-end mx-1 btn btn-light" href="#">Learn more &raquo;</a>
+<div class="p-1 bg-light">
+    <h2 class="lead">Hello!</h2>
+    <p>
+        New..! Item 03..! mail: one@example.com..! Lorem ipsum dolor sit amet,
+    </p>
+</div>
+</div>
+
+<main class="container">
+<div class="d-flex">
+    
+{% if result %}
+{% for i in result %}
+
+<div class="card mt-2 me-1">
+
+    <ul class="card-header list-group list-group-horizontal">
+        <li class="list-group-item pt-3">
+            <sup class="float-start">id:</sup>
+            <span>{{ user.id }}</span>
+        </li>
+        <li class="list-group-item pt-3">
+            <sup class="float-start">name:</sup>
+            <span>{{ user.name }}</span>
+        </li>
+    </ul>
+
+    <ul class="list-group list-group-flush">
+
+        <li class="list-group-item pt-3">
+            <sup class="float-start">email:</sup>
+            <p>{{ user.email }}</p>
+        </li>
+        {% include "created_modified.html" %}
+    </ul>
+
+    {% if user.file %}
+    <figure>
+    <img width="120" class="shadow-sm m-2" src="{{ user.file }}" alt="img">
+    </figure>
+    {% endif %}
+
+    <div class="card-footer">
+        <a class="btn btn-outline-primary btn-sm" href="/auth/details/{{ user.id }}" role="button">view details &raquo;</a>
+    </div>
+
+</div>
+
+{% endfor %}
+
+    {% else %}
+    <span class="mt-5">no information available</span>
+{% endif %}
+</div>
+</main>
+
+{% endblock %}
+

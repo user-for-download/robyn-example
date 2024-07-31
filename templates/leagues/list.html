@@ -1,0 +1,56 @@
+{% extends "main.html" %}
+
+{% block title %}
+    Leagues: {{ leagues|length }}
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 p-2">
+                <div class="col-sm-12 p-4 text-center">
+                    <h1>Leagues</h1>
+                    {% if auth %}
+                        <form method="POST" action="/league/update">
+                            <button type="submit" class="btn btn-primary m-2">Update Leagues</button>
+                        </form>
+                    {% endif %}
+                </div>
+                {% if leagues %}
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th class="text-center" scope="col">Id</th>
+                            <th scope="col">Name</th>
+                            <th class="text-center" scope="col">Tier</th>
+                            <th class="text-center" scope="col">is over</th>
+                            <th class="text-center" scope="col">Prize</th>
+                            <th class="text-center" scope="col">Updated</th>
+                            <th class="text-center" scope="col">Start</th>
+                            <th class="text-center" scope="col">End</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for league in leagues %}
+                            <tr {% if league.is_over %} class="table-primary" {% endif %}>
+                                <th scope="row"><a href="{{ league.get_absolute_url() }}">{{ league.id }}</a></th>
+                                <td>{{ league.display_name }}</td>
+                                <td {% if league.tier or 0 > 1 %}
+                                    class="table-warning"{% endif %}>{{ league.tier }}</td>
+                                <td>{{ league.is_over }}</td>
+                                <td>{{ league.prize_pool }}</td>
+                                <td>{{ league.get_last_update() }}</td>
+                                <td>{{ league.get_verbose_start_datetime() }}</td>
+                                <td>{{ league.get_verbose_end_datetime() }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>There are no leagues in the library.</p>
+                {% endif %}
+            </div>
+            {#      {% include 'pagination.html' %}#}
+        </div>
+    </div>
+{% endblock content %}
