@@ -26,7 +26,7 @@ async def get_team_list(request: Request):
         matches_stmt = (
             select(Match)
             .filter(Match.deleted_at.is_(None))
-            .filter(Match.game_version_id == settings.GAME_VERSION)
+            .filter(Match.game_version_id >= settings.GAME_VERSION)
             .order_by(Match.id.desc())
             .options(
                 selectinload(Match.radiant_team),

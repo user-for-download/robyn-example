@@ -44,7 +44,7 @@ async def get_hero_counts_picks_bans(type_: str, id_: int):
                 select(MatchPickBan.hero_id, MatchPickBan.is_pick, func.count(MatchPickBan.hero_id).label('count'))
                 .join(Match)
                 .filter(Match.deleted_at.is_(None), MatchPickBan.deleted_at.is_(None))
-                .filter(Match.game_version_id == settings.GAME_VERSION)
+                .filter(Match.game_version_id >= settings.GAME_VERSION)
                 .filter(match_filter)
                 .group_by(MatchPickBan.hero_id)
                 .group_by(MatchPickBan.is_pick)
